@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <math.h>
 
+const int  TestIsRequaired = 1,
+            RootIsAnyNomber = -1,
+            OneRoot         = 1,
+            TwoRoot         = 2,
+            NoRoot          = 0;
+
+
+
 void Unitest ();
 int Scan_a_b_c(double *a, double *b, double *c);
 int Square (double a, double b, double c, double* x1, double* x2, int *N_of_roots);
@@ -16,7 +24,7 @@ int main ()
     printf ("Do you want to check the program? (Yes-press 1, NO-press 2)   ");
     scanf ("%d", &Need_check);
 
-    if (Need_check==1)
+    if (Need_check == TestIsRequaired )
         Unitest ();
 
     if (Scan_a_b_c (&a,&b,&c))
@@ -35,20 +43,20 @@ int Square (double a, double b, double c, double* x1, double* x2, int *N_of_root
 
     if ((a==0)&&(b==0)&&(c==0))
         {
-            *N_of_roots = -1;
+            *N_of_roots = RootIsAnyNomber;
             return 1;
         }
 
     if ((a==0)&&(b==0)&&(c!=0))
         {
-            *N_of_roots =  0;
+            *N_of_roots =  NoRoot;
             return 1;
         }
 
     if ((a==0) && (b!=0))
     {
         *x1=-c/b;
-        *N_of_roots =  1;
+        *N_of_roots =  OneRoot;
         return 1;
     }
 
@@ -56,21 +64,21 @@ int Square (double a, double b, double c, double* x1, double* x2, int *N_of_root
 
     if (d<0)
         {
-            *N_of_roots =  0;
+            *N_of_roots =  NoRoot;
             return 1;
         }
 
     if (d==0)
       {
         *x1=-b/2/a;
-        *N_of_roots =  1;
+        *N_of_roots =  OneRoot;
         return 1;
       }
     else
         d=sqrt(d);
     *x1=(-b-d)/2/a;
     *x2=(-b+d)/2/a;
-    *N_of_roots =  2;
+    *N_of_roots =  TwoRoot;
     return 1;
 }
 
@@ -146,22 +154,22 @@ int Scan_a_b_c (double* a, double* b, double* c)
 {
     switch (Number_of_roots)
     {
-    case -1:
+    case RootIsAnyNomber:
     {
         printf ("Root is any real number\n");
         break;
     }
-    case 0:
+    case NoRoot:
     {
         printf ("No roots\n");
         break;
     }
-    case 1:
+    case OneRoot:
     {
         printf ("One root: x1 = %lg\n", x1);
         break;
     }
-    case 2:
+    case TwoRoot:
     {
         printf ("Two roots: x1=%lg x2=%lg\n", x1, x2);
         break;
